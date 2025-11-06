@@ -1,6 +1,6 @@
 # 📌 Machine Learning Fundamentals 
 
-A comprehensive machine learning project covering **supervised learning** (regression & classification), **unsupervised learning** (K-Means clustering), and **reinforcement learning** (Q-Learning). Built as part of a structured ML course across two sessions.
+A comprehensive machine learning project covering **supervised learning** (regression & classification), **unsupervised learning** (K-Means clustering), **reinforcement learning** (Q-Learning), and **deep learning / computer vision** (CNNs, transfer learning, YOLO). Built as part of a structured ML course across multiple sessions.
 
 ## 📂 Project Structure
 
@@ -9,6 +9,9 @@ Machine-Learning-Projects/
 ├── Datasets/                              # Training datasets
 ├── machine-learning-part1.ipynb           # Session 1: ML fundamentals & core concepts
 ├── machine-learning-part2.ipynb           # Session 2: Regression, classification, regularization
+├── machine-learning-part3.ipynb           # Session 3: Applied classification case studies
+├── machine-learning-part4.ipynb           # Session 4: Neural networks & deep learning intro
+├── machine-learning-part5.ipynb           # Session 5: Advanced CNNs & computer vision
 ├── requirements.txt                       # Python dependencies
 └── .gitignore
 ```
@@ -41,6 +44,18 @@ Machine-Learning-Projects/
 - **Regularization** — Ridge (L2), Lasso (L1), ElasticNet with alpha tuning via GridSearchCV
 - **Model Saving/Loading** with `joblib`
 
+### Part 5 — Advanced CNNs & Computer Vision
+
+- **CNN Architecture Evolution** — hand-built VGG-style stack (3 conv blocks, 3.25M params) vs ResNet-style network with residual skip connections and batch norm (216K params), trained head-to-head on a CIFAR-10 subset for 15 epochs
+- **Transfer Learning** — MobileNetV2 pre-trained on ImageNet as a frozen feature extractor with a custom classification head (CIFAR-10 images upscaled to 96×96)
+- **Fine-Tuning** — unfreezing the last 20 base layers and retraining at a reduced learning rate (1e-5) for a further accuracy gain
+- **Image Data Augmentation** — `ImageDataGenerator` with rotation, shift, zoom, and horizontal flip; side-by-side training of the same CNN with and without augmentation to show the regularization effect on validation loss
+- **Pre-trained ImageNet Classification** — ResNet50 with `decode_predictions` for top-5 labelling of arbitrary images
+- **Feature Map Visualization** — extracting and plotting intermediate conv-layer activations to see what the network learns
+- **Object Detection with YOLOv8** — `ultralytics` YOLOv8n for image detection (bounding boxes + confidences), video-file detection with annotated output, real-time webcam detection, and the dataset/label/`data.yaml` layout for custom training
+- **Instance Segmentation** — YOLOv8n-seg for per-object masks
+- **Pose Estimation** — YOLOv8n-pose for 17 body keypoints
+
 ## 📊 Datasets Used
 
 | Dataset | Task | Type | Source |
@@ -53,6 +68,9 @@ Machine-Learning-Projects/
 | Wine Quality (Red) | Quality rating prediction | Classification | UCI ML Repository |
 | Synthetic Customer Data | Customer segmentation | Clustering | Generated |
 | GridWorld | Navigation agent | Reinforcement Learning | Generated |
+| CIFAR-10 | Image classification (10 classes) | Deep Learning / CV | Keras datasets |
+| ImageNet (weights only) | Pre-trained backbones (MobileNetV2, ResNet50) | Transfer Learning | Keras Applications |
+| COCO (weights only) | Detection / segmentation / pose | Object Detection | Ultralytics YOLOv8 |
 
 ## 🔑 Key Results
 
@@ -67,12 +85,19 @@ Machine-Learning-Projects/
 | Logistic Regression | Iris (multi-class) | 97.3% accuracy |
 | Decision Tree (depth=2) | Iris | 96.0% accuracy |
 | Q-Learning Agent | 5×5 GridWorld | Avg reward = 92.94 |
+| VGG-Style CNN (3.25M params) | CIFAR-10 subset | 61.7% test accuracy |
+| ResNet-Style CNN (216K params) | CIFAR-10 subset | 43.3% test accuracy |
+| MobileNetV2 Transfer Learning (frozen) | CIFAR-10 subset | 61.5% test accuracy |
+| MobileNetV2 Fine-Tuned (last 20 layers) | CIFAR-10 subset | 63.0% test accuracy (+1.5%) |
+| YOLOv8n | Sample street image | bus 86.8%, persons 86.4% / 83.3% / 81.1% |
+
+> Part 5 CNNs were trained on a 10,000-image CIFAR-10 subset (2,000 test images) on CPU, so accuracies reflect the limited training budget rather than the architectures' ceilings. Transfer learning used only 1,000 training images and reached comparable accuracy in a fraction of the epochs.
 
 ## ⚙️ Setup
 
 ```bash
 # Clone the repo
-git clone https://github.com/GamithaManawadu/Machine-Learning-Projects.git
+git clone https://github.com/Sanduni-Gamage/ML-Journey.git
 cd Machine-Learning-Projects
 
 # Create virtual environment
@@ -82,7 +107,12 @@ source .venv/bin/activate        # Linux/Mac
 
 # Install dependencies
 pip install -r requirements.txt
+
+# Extra dependencies for Part 5 (computer vision)
+pip install opencv-python ultralytics
 ```
+
+YOLOv8 weights (`yolov8n.pt`, `yolov8n-seg.pt`, `yolov8n-pose.pt`) download automatically on first use.
 
 ## 🛠 Tech Stack
 
@@ -93,4 +123,7 @@ pip install -r requirements.txt
 - statsmodels - VIF and statistical tests
 - scipy - residual analysis and statistical distributions
 - joblib - model persistence
+- TensorFlow / Keras - CNNs, transfer learning, data augmentation
+- OpenCV, Pillow - image loading, resizing, video I/O
+- ultralytics - YOLOv8 detection, segmentation, pose estimation
 
