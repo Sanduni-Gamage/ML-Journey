@@ -9,8 +9,8 @@ Machine-Learning-Projects/
 ├── Datasets/                              # Training datasets
 ├── machine-learning-part1.ipynb           # Session 1: ML fundamentals & core concepts
 ├── machine-learning-part2.ipynb           # Session 2: Regression, classification, regularization
-├── machine-learning-part3.ipynb           # Session 3: Applied classification case studies
-├── machine-learning-part4.ipynb           # Session 4: Neural networks & deep learning intro
+├── machine-learning-part3.ipynb           # Session 3: Classification, ensembles & model evaluation
+├── machine-learning-part4.ipynb           # Session 4: Neural networks & deep learning
 ├── machine-learning-part5.ipynb           # Session 5: Advanced CNNs & computer vision
 ├── requirements.txt                       # Python dependencies
 └── .gitignore
@@ -44,6 +44,29 @@ Machine-Learning-Projects/
 - **Regularization** — Ridge (L2), Lasso (L1), ElasticNet with alpha tuning via GridSearchCV
 - **Model Saving/Loading** with `joblib`
 
+### Part 3 Classification, Ensembles & Model Evaluation
+
+- **Classification Fundamentals** — binary (Breast Cancer) vs multiclass (Wine, Iris, Digits) problem setup and baselines
+- **Logistic Regression Deep Dive** — sigmoid/derivative/logit plots, loss intuition, decision threshold tuning (best F1 at threshold ≈ 0.36), coefficients as odds ratios, regularization paths, calibration curves, linear vs polynomial features on the moons dataset
+- **Decision Trees** — Gini vs entropy criteria, cost-complexity pruning (`ccp_alpha`), depth tuning, 5-fold cross-validation
+- **Support Vector Machines** — hinge loss & margin intuition, linear vs RBF/poly/sigmoid kernels, effect of `C` and `gamma`, why scaling matters (75.0% → 94.4% on Wine), GridSearchCV tuning, support-vector visualization
+- **Ensemble Methods** — Random Forest (OOB score, `max_features`, feature importances), AdaBoost (estimator weights, margins, staged improvement), Gradient Boosting (learning curves, partial dependence plots), XGBoost (eval history, gain importances), plus 2D decision regions and probability calibration
+- **Performance Evaluation** — ROC/AUC and precision-recall curves, confusion matrices, precision/recall trade-offs across models
+- **Class Imbalance Handling** — 90/10 imbalanced dataset with class weights and SMOTE oversampling
+- **Titanic Survival Case Study** — the same problem solved four ways (Logistic Regression, Decision Tree, SVM, Random Forest) with shared preprocessing and confusion matrices
+- **German Credit Risk Activity** — head-to-head comparison of LR / DT / SVM / RF on OpenML `credit-g` (mixed numeric + categorical, 30% positive rate), ranked by accuracy, precision, recall, F1, ROC-AUC, and training time
+
+### Part 4 Neural Networks & Deep Learning
+
+- **Perceptron from Scratch** — NumPy implementation, convergence on a linearly separable problem (100% accuracy) and its failure on XOR (50%), demonstrating the limits of a linear decision boundary
+- **Backpropagation from Scratch** — a fully manual `DetailedNN` class with Xavier/He initialization, forward/backward passes, gradient caching, and gradient-flow visualization
+- **Activation Functions** — sigmoid, tanh, ReLU, Leaky ReLU, Swish, GELU with their derivatives, range/zero-centering/smoothness comparison, and the vanishing-gradient problem
+- **Keras MLP** — Digits classification with dropout, `EarlyStopping` and `ReduceLROnPlateau` callbacks (97.5% test accuracy)
+- **CNNs** — 3-block MNIST architecture with batch normalization and dropout, trained with data augmentation (98.2% test accuracy), plus feature-map inspection
+- **RNNs** — synthetic time series (trend + seasonality + noise) forecast with SimpleRNN, LSTM, GRU, BiLSTM, and stacked LSTM
+- **Advanced Optimization** — SGD, SGD+Momentum, RMSprop, Adam, and AdamW compared on California Housing regression
+- **Regularization Techniques** — baseline vs L2, dropout, batch normalization, and combined, with an L2 strength sweep
+
 ### Part 5 Advanced CNNs & Computer Vision
 
 - **CNN Architecture Evolution** — hand-built VGG-style stack (3 conv blocks, 3.25M params) vs ResNet-style network with residual skip connections and batch norm (216K params), trained head-to-head on a CIFAR-10 subset for 15 epochs
@@ -66,6 +89,12 @@ Machine-Learning-Projects/
 | Wine (sklearn) | Wine type classification | Classification | scikit-learn |
 | Iris | Flower classification | Classification | scikit-learn |
 | Wine Quality (Red) | Quality rating prediction | Classification | UCI ML Repository |
+| Breast Cancer | Malignant vs benign tumours | Binary Classification | scikit-learn |
+| Digits | Handwritten digit recognition | Classification | scikit-learn |
+| Titanic | Passenger survival prediction | Binary Classification | seaborn |
+| German Credit (credit-g) | Credit risk (good vs bad) | Binary Classification | OpenML |
+| MNIST | Handwritten digit recognition | Deep Learning | Keras datasets |
+| Synthetic Time Series | Sequence forecasting | Deep Learning (RNN) | Generated |
 | Synthetic Customer Data | Customer segmentation | Clustering | Generated |
 | GridWorld | Navigation agent | Reinforcement Learning | Generated |
 | CIFAR-10 | Image classification (10 classes) | Deep Learning / CV | Keras datasets |
@@ -85,6 +114,17 @@ Machine-Learning-Projects/
 | Logistic Regression | Iris (multi-class) | 97.3% accuracy |
 | Decision Tree (depth=2) | Iris | 96.0% accuracy |
 | Q-Learning Agent | 5×5 GridWorld | Avg reward = 92.94 |
+| Logistic Regression | Breast Cancer | 94.7% accuracy |
+| Logistic Regression | Digits | 96.0% accuracy |
+| Decision Tree (entropy) | Wine | 97.2% accuracy |
+| SVM (RBF, tuned) | Wine | 98.9% CV accuracy |
+| AdaBoost / Gradient Boosting / XGBoost | Breast Cancer | 95.6% accuracy, AUC up to 0.994 |
+| Decision Tree (depth=5) | Titanic | 81.6% accuracy (best of 4 models) |
+| Logistic Regression | German Credit | F1 = 0.593, ROC-AUC = 0.804 (best F1) |
+| Keras MLP (128-64-32 + dropout) | Digits | 97.5% test accuracy |
+| CNN (3 blocks + BN + augmentation) | MNIST | 98.2% test accuracy |
+| GRU | Synthetic time series | Test MAE = 1.58 (best of 5 RNNs) |
+| Dropout-regularized MLP | California Housing | Test MAE = 0.309 |
 | VGG-Style CNN (3.25M params) | CIFAR-10 subset | 61.7% test accuracy |
 | ResNet-Style CNN (216K params) | CIFAR-10 subset | 43.3% test accuracy |
 | MobileNetV2 Transfer Learning (frozen) | CIFAR-10 subset | 61.5% test accuracy |
@@ -123,7 +163,9 @@ YOLOv8 weights (`yolov8n.pt`, `yolov8n-seg.pt`, `yolov8n-pose.pt`) download auto
 - statsmodels - VIF and statistical tests
 - scipy - residual analysis and statistical distributions
 - joblib - model persistence
-- TensorFlow / Keras - CNNs, transfer learning, data augmentation
+- xgboost - gradient boosted trees
+- imbalanced-learn - SMOTE oversampling for class imbalance
+- TensorFlow / Keras - MLPs, CNNs, RNNs, transfer learning, data augmentation
 - OpenCV, Pillow - image loading, resizing, video I/O
 - ultralytics - YOLOv8 detection, segmentation, pose estimation
 
