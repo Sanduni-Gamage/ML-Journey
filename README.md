@@ -18,7 +18,7 @@ Machine-Learning-Projects/
 
 ## 📌 What's Covered
 
-### Part 1 — ML Fundamentals & Core Concepts
+### Part 1 ML Fundamentals & Core Concepts
 
 - **Linear Regression** on California Housing dataset (EDA, correlation heatmap, train/test split, evaluation metrics, residual analysis, learning curves)
 - **Unsupervised Learning**: K-Means customer segmentation on synthetic data (elbow method, cluster visualization)
@@ -28,7 +28,7 @@ Machine-Learning-Projects/
 - **Underfitting vs Overfitting**: Polynomial degree comparison (degree 1, 5, 15) on synthetic sine data
 - **Data Handling**: Loading, EDA, and preprocessing on synthetic customer data (missing value imputation, outlier removal via IQR, feature scaling, categorical encoding)
 
-### Part 2 — Regression, Classification & Regularization
+### Part 2 Regression, Classification & Regularization
 
 - **Simple Linear Regression** — CO2 emissions from engine size (R² = 0.76)
 - **Multivariable Linear Regression** — CO2 from 6 vehicle features (R² = 0.90)
@@ -44,7 +44,7 @@ Machine-Learning-Projects/
 - **Regularization** — Ridge (L2), Lasso (L1), ElasticNet with alpha tuning via GridSearchCV
 - **Model Saving/Loading** with `joblib`
 
-### Part 5 — Advanced CNNs & Computer Vision
+### Part 5 Advanced CNNs & Computer Vision
 
 - **CNN Architecture Evolution** — hand-built VGG-style stack (3 conv blocks, 3.25M params) vs ResNet-style network with residual skip connections and batch norm (216K params), trained head-to-head on a CIFAR-10 subset for 15 epochs
 - **Transfer Learning** — MobileNetV2 pre-trained on ImageNet as a frozen feature extractor with a custom classification head (CIFAR-10 images upscaled to 96×96)
