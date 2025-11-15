@@ -1,17 +1,19 @@
 # 📌 Machine Learning Fundamentals 
 
-A comprehensive machine learning project covering **supervised learning** (regression & classification), **unsupervised learning** (K-Means clustering), **reinforcement learning** (Q-Learning), and **deep learning / computer vision** (CNNs, transfer learning, YOLO). Built as part of a structured ML course across multiple sessions.
+A comprehensive machine learning project covering **supervised learning** (regression & classification), **unsupervised learning** (K-Means clustering), **reinforcement learning** (Q-Learning), **deep learning / computer vision** (CNNs, transfer learning, YOLO), and **generative AI** (diffusion models, LLMs, TTS, super-resolution). Built as part of a structured ML course across multiple sessions.
 
 ## 📂 Project Structure
 
 ```
 Machine-Learning-Projects/
 ├── Datasets/                              # Training datasets
+├── diagrams/                              # Architecture diagrams used in Part 6
 ├── machine-learning-part1.ipynb           # Session 1: ML fundamentals & core concepts
 ├── machine-learning-part2.ipynb           # Session 2: Regression, classification, regularization
 ├── machine-learning-part3.ipynb           # Session 3: Classification, ensembles & model evaluation
 ├── machine-learning-part4.ipynb           # Session 4: Neural networks & deep learning
 ├── machine-learning-part5.ipynb           # Session 5: Advanced CNNs & computer vision
+├── machine-learning-part6.ipynb           # Session 6: Generative AI & large language models
 ├── requirements.txt                       # Python dependencies
 └── .gitignore
 ```
@@ -79,6 +81,22 @@ Machine-Learning-Projects/
 - **Instance Segmentation** — YOLOv8n-seg for per-object masks
 - **Pose Estimation** — YOLOv8n-pose for 17 body keypoints
 
+### Part 6 Generative AI & Large Language Models
+
+A concept-and-architecture session built around annotated diagrams and interactive widgets rather than model training.
+
+- **Generative AI Fundamentals** — discriminative P(Y\|X) vs generative P(X) models, latent spaces, embeddings, and probability distributions, with an interactive 2D latent-space plot showing concept clustering and interpolation
+- **Diffusion Models (Stable Diffusion)** — forward noising vs reverse denoising, latent diffusion at 64×64×4 instead of 512×512×3 (48× cheaper), and the three components: CLIP text encoder (77×768), U-Net denoiser with cross- and self-attention (860M–2.6B params), and the VAE encoder/decoder
+- **Generation Parameters** — classifier-free guidance scale, step count vs quality trade-off, and PNDM / DDIM / DPM samplers, each with a side-by-side comparison figure
+- **Transformer Architecture** — encoder-only (BERT), decoder-only (GPT, LLaMA), and encoder-decoder (T5), with a focus on decoder-only generation
+- **Attention Mechanism** — Q/K/V as a database lookup, the scaled dot-product formula, multi-head attention across 8–32 heads, and visualized attention patterns
+- **Tokenization & Embeddings** — BPE / SentencePiece subword splitting, ~50K vocabularies, token IDs → dense vectors, and sinusoidal positional encoding
+- **Autoregressive Generation** — next-token prediction loop, causal masking, and stop conditions
+- **Sampling Strategies** — greedy, temperature, top-k, top-p (nucleus), and repetition penalty, with an interactive widget showing how temperature reshapes the probability distribution
+- **Text-to-Audio** — the TTS pipeline (text encoder → acoustic model → vocoder), plus Bark (multilingual, music/SFX, speaker cloning) vs Meta's MMS-TTS (1,100+ languages)
+- **Image Super-Resolution** — bicubic interpolation vs neural SR, the RRDB architecture behind Real-ESRGAN (dense connections, local/global residuals, PixelShuffle upsampling, GAN perceptual loss), and PSNR / SSIM quality metrics
+- **Cross-Model Synthesis** — the unifying threads across all four model families: attention, transformers, latent representations, sampling, and self-supervised large-scale training
+
 ## 📊 Datasets Used
 
 | Dataset | Task | Type | Source |
@@ -133,6 +151,8 @@ Machine-Learning-Projects/
 
 > Part 5 CNNs were trained on a 10,000-image CIFAR-10 subset (2,000 test images) on CPU, so accuracies reflect the limited training budget rather than the architectures' ceilings. Transfer learning used only 1,000 training images and reached comparable accuracy in a fraction of the epochs.
 
+> Part 6 trains no models — it covers generative architectures through diagrams and interactive widgets, so it contributes no rows to the tables above.
+
 ## ⚙️ Setup
 
 ```bash
@@ -150,6 +170,9 @@ pip install -r requirements.txt
 
 # Extra dependencies for Part 5 (computer vision)
 pip install opencv-python ultralytics
+
+# Extra dependencies for Part 6 (interactive widgets)
+pip install ipywidgets
 ```
 
 YOLOv8 weights (`yolov8n.pt`, `yolov8n-seg.pt`, `yolov8n-pose.pt`) download automatically on first use.
@@ -168,4 +191,5 @@ YOLOv8 weights (`yolov8n.pt`, `yolov8n-seg.pt`, `yolov8n-pose.pt`) download auto
 - TensorFlow / Keras - MLPs, CNNs, RNNs, transfer learning, data augmentation
 - OpenCV, Pillow - image loading, resizing, video I/O
 - ultralytics - YOLOv8 detection, segmentation, pose estimation
+- ipywidgets - interactive demos in the generative AI notebook
 
